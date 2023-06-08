@@ -1,0 +1,31 @@
+[
+  {
+    "date": "04.06.2023 22:00",
+    "location": {
+      "street": "Viethstraße",
+      "zip": "26434",
+      "city": "Hooksiel",
+      "state": "Sachsen-Anhalt",
+      "coords": "53.6291585,8.0288944"
+    },
+    "title": "Angriff auf schwules Touristenpaar in Hooksiel",
+    "url": "https://www.queer.de/detail.php?article_id=45868",
+    "help": {}
+  },
+  {
+    "date": "07.06.2023 13:00",
+    "location": {
+      "street": "Am Treff",
+      "zip": "06124",
+      "city": "Halle (Saale)",
+      "state": "Sachsen-Anhalt",
+      "coords": "51.4770545,11.9277827"
+    },
+    "title": "Homofeindlicher Angriff: 22-Jähriger in Halle mit Reizgas besprüht",
+    "url": "https://www.queer.de/detail.php?article_id=45867",
+    "help": {
+      "authority": "Polizei Halle (Saale)",
+      "contact": "(0345) 224-2000"
+    }
+  }
+]

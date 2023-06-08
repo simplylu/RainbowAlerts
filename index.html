@@ -1,12 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RainbowAlerts</title>
-</head>
-<body>
-  
-</body>
+  <head>
+    <meta charset="utf-8">
+    <title>RainbowAlerts</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="" />
+    <style type="text/css">
+      body{
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        width: 100vw;
+        height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
+    <script>
+      const map = L.map("map", {
+        center: [51.16, 10.44],
+        zoom: 6,
+        // scrollWheelZoom: false
+      });
+
+      const basemaps = {
+        StreetView: L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',   {attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}),
+        Places: L.tileLayer.wms('http://ows.mundialis.de/services/service?', {layers: 'OSM-Overlay-WMS'}),
+        Stadia_AlidadeSmoothDark: L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png', {maxZoom: 20,attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'}),
+      };
+      L.control.layers(basemaps).addTo(map);
+      basemaps.Stadia_AlidadeSmoothDark.addTo(map);
+
+      const basicIcon = L.icon({
+        iconUrl: "/assets/warning.png",
+        iconSize: [32, 32],
+      });
+      
+      const marker = L.marker([51, 10], {icon: basicIcon})
+        .bindPopup("Test")
+        .addTo(map);
+      
+
+      const request = new XMLHttpRequest();
+      request.open("GET", "https://simplylu.github.io/RainbowAlerts/incidents.json", true);
+      request.onload = () => {
+        if (request.status == 200) {
+          const incidents = JSON.parse(request.responseText);
+          console.log(incidents);
+        } else {
+          console.error("Error:", request.statusText);
+        }
+      }
+      request.onerror = () => {
+        console.error("Request failed");
+      }
+      request.send();
+    </script>
+  </body>
 </html>
